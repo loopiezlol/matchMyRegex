@@ -11,7 +11,7 @@ body
 	transition:background-color 500ms linear;
 }
 
-*
+*:not(.option-edit-wrapper)
 {
 	font-family:Roboto;
 	font-stretch:condensed;
@@ -91,7 +91,7 @@ h1
 	position:absolute;
 	width:70%;
 	font-stretch:condensed;
-	top:calc(50%+20px);
+	top: calc(50% + 20px);
 	left:calc(50%);
 	transform:translateX(-50%) translateY(-50%);
 	background:#FFF;
@@ -124,7 +124,7 @@ h1
 
 .input-bar,input
 {
-	width:calc(100%-17px);
+	width: calc(100% - 17px);
 	height:40px;
 	font-size:30px;
 	margin-bottom:5px;
@@ -215,7 +215,7 @@ button:hover
 
 .copy
 {
-	width:calc(40%-40px);
+	width:calc(40% - 40px);
 	position:fixed;
 	right:10px;
 	font-size:30px;
@@ -228,7 +228,7 @@ button:hover
 	top:50%;
 	left:50%;
 	transform:translateX(-50%) translateY(-50%);
-	width:calc(100%-15vh);
+	width: calc(100% - 15vh);
 	margin-top:20px;
 	line-height:30px;
 }

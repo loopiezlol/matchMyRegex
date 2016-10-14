@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import RegexGame from './RegexGame.js';
-import url from "../public/circle.png";
-import sortIcon from "../public/sort-arrows.png";
+import url from '../public/circle.png';
+import sortIcon from '../public/sort-arrows.png';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
-
 
 class App extends Component {
   constructor(props) {
@@ -48,7 +47,7 @@ class App extends Component {
   };
 
   handleCopy() {
-    const input = document.getElementById("sharable");
+    const input = document.getElementById('sharable');
     input.select();
     try {
       document.execCommand('copy');
@@ -81,10 +80,10 @@ class App extends Component {
     const {share} = this.state;
     if (share) {
       return (
-        <div className="share-screen">
+        <div className='share-screen'>
           <h1>Share your exercise:</h1>
-          <input id="sharable" ref="sharable" type="text" value={this.generateSharableLink()} autoFocus  />
-          <button className="copy" onClick={this.handleCopy}>Copy</button>
+          <input id='sharable' ref='sharable' type='text' value={this.generateSharableLink()} autoFocus  />
+          <button className='copy' onClick={this.handleCopy}>Copy</button>
         </div>
       )
     }
@@ -96,7 +95,7 @@ class App extends Component {
     const toggleShare = share ? ' open' : '';
     const toggleHide = share ? ' hide' : '';
     return (
-      <div className="exercise frame-wrapper">
+      <div className='exercise frame-wrapper'>
         <h1 className={`title${toggleHide}`}> Match the following expressions:</h1>
         <RegexGame
           options={options}
@@ -104,8 +103,8 @@ class App extends Component {
           foundSrc={url}
           notFoundSrc={url}
           returnScore={true} />
-        <button className="share" onClick={this.toggleShare}>share</button>
-        <button className="edit" onClick={this.toggleEdit}>edit</button>
+        <button className='share' onClick={this.toggleShare}>share</button>
+        <button className='edit' onClick={this.toggleEdit}>edit</button>
         <EditPanel
           options={options}
           open={edit}
@@ -134,21 +133,21 @@ class App extends Component {
       const color = '#' + hex(r) + hex(g) + hex(b);
       document.body.style.backgroundColor = color;
     } else {
-      document.body.style.backgroundColor = "white";
+      document.body.style.backgroundColor = 'white';
     }
 
   };
 
   resizeContainer = () => {
-    let options = document.getElementsByClassName("options-wrapper");
+    let options = document.getElementsByClassName('options-wrapper');
     const max = Math.max(...[].slice.call(options).map((o => {
       let x = window.getComputedStyle(o).height;
       return x.substring(0, x.length - 2);
     })));
 
-    let frames = document.getElementsByClassName("frame-wrapper");
+    let frames = document.getElementsByClassName('frame-wrapper');
     for (let i = 0; i < frames.length; i++) {
-      frames[i].style.height = (max + 200) + "px";
+      frames[i].style.height = (max + 200) + 'px';
     }
   };
 
@@ -157,23 +156,23 @@ class App extends Component {
 const SortableItem = SortableElement(({value, handleChange, handleDelete, index}) => {
 
   return (
-    <div className="option-edit-wrapper" >
-      <img role="presentation"
+    <div className='option-edit-wrapper' >
+      <img role='presentation'
         src={sortIcon}
-        className="sort-icon" />
-      <input className="option-input"
+        className='sort-icon' />
+      <input className='option-input'
         id={index}
         value={value}
-        type="text"
+        type='text'
         onChange={handleChange} />
-      <input type="button" id={index} className="delete-button" onClick={handleDelete} value="Delete" />
+      <input type='button' id={index} className='delete-button' onClick={handleDelete} value='Delete' />
     </div>
   );
 });
 
 const SortableList = SortableContainer(({items, handleChange, handleDelete}) => {
     return (
-        <div className="options-wrapper">
+        <div className='options-wrapper'>
             {items.map((value, index) => {
               return (
                 <SortableItem
@@ -240,7 +239,7 @@ const EditPanel = React.createClass({
 
   addOption() {
     const {options} = this.state;
-    options.push("");
+    options.push('');
     this.setState({
       options,
     })
@@ -249,7 +248,7 @@ const EditPanel = React.createClass({
   render() {
     let {options} = this.state;
     const {open} = this.props;
-    const toggle = open ? "open" : '';
+    const toggle = open ? 'open' : '';
     return (
       <div className={`editor frame-wrapper ${toggle}`}>
         <h1>Craft your own exercise:</h1>
@@ -258,8 +257,7 @@ const EditPanel = React.createClass({
           onSortEnd={this.onSortEnd}
           handleChange={this.handleChange}
           handleDelete={this.handleDelete} />
-        <div style={{clear:'both'}}/>
-        <div className="edit-options">
+        <div className='edit-options'>
           <button onClick={this.addOption}>Add</button>
           <button onClick={this.saveOptions}>Save</button>
         </div>
