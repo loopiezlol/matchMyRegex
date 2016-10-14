@@ -8,6 +8,7 @@ const RegexGame = React.createClass({
     foundSrc: React.PropTypes.string,
     notFoundSrc: React.PropTypes.string,
     returnScore: React.PropTypes.bool,
+    regexType: React.PropTypes.string,
   },
 
   getInitialState() {
@@ -18,10 +19,14 @@ const RegexGame = React.createClass({
 
   renderOptions() {
     const {options, foundSrc, notFoundSrc} = this.props;
+    const {pattern} = this.state;
     return (
-      options.map(option => {
+      options.map((option, index) => {
         return (
-          <RegexOption pattern={this.state.pattern}
+          <RegexOption
+            className='regex-options'
+            key={`option-${index}`}
+            pattern={pattern}
             text={option}
             foundSrc={foundSrc}
             notFoundSrc={notFoundSrc} />
@@ -32,21 +37,22 @@ const RegexGame = React.createClass({
 
   render() {
     return (
-      <div className="regex-game" >
-        <div className="options">
+      <div className='regex-game' >
+        <div className='options-wrapper'>
           {this.renderOptions()}
         </div>
-        <input className="input-bar" placeholder="Regular Expression"
-          type="text" onChange={this.handleChange} />
+        <input className='input-bar' placeholder='Regular Expression'
+          type='text' onChange={this.handleChange} />
       </div>
     );
   },
 
   handleChange(e) {
+    const value = e.target.value;
     this.setState({
-      pattern: e.target.value,
+      pattern: value,
     });
-    this.inputCallback(e.target.value);
+    this.inputCallback(value);
   },
 
   getScore(options, pattern) {
@@ -85,20 +91,23 @@ const RegexOption = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    const re = new RegExp(nextProps.pattern, "g");
+    const {text} = this.props;
+    const type = this.props.regexType || 'g';
+    const re = new RegExp(nextProps.pattern, type);
     this.setState({
-      found: this.props.text.match(re),
+      found: text.match(re),
     })
   },
 
 
   renderText() {
-    const pattern = this.props.pattern;
+    const {pattern} = this.props;
     const matchColor = this.props.matchColor || 'green';
-    let text = this.props.text;
+    const type = this.props.regexType || 'g';
+    let {text} = this.props;
 
     if (pattern) {
-      const re = new RegExp(pattern, "g")
+      const re = new RegExp(pattern, type)
       text = text.replace(re, (match, x) => {
         return (`<span class="highlight" style="color:${matchColor}">${match}</span>`);
       });
@@ -110,12 +119,12 @@ const RegexOption = React.createClass({
 
   renderCheck() {
     const {foundSrc, notFoundSrc, pattern} = this.props;
-    const found = this.state.found;
+    const {found} = this.state;
     let url = foundSrc || '';
     let match = '';
     if (pattern && foundSrc && notFoundSrc) {
        url = found ? foundSrc : notFoundSrc;
-       match = found ? 'match' : "not-match";
+       match = found ? 'match' : 'not-match';
      };
     return (
       <img role='presentation'
@@ -126,7 +135,7 @@ const RegexOption = React.createClass({
 
   render() {
     return (
-      <div className="option-wrapper">
+      <div className='option-wrapper'>
         <div dangerouslySetInnerHTML={this.renderText()} />
         {this.renderCheck()}
       </div>
