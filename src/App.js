@@ -67,7 +67,7 @@ class App extends Component {
   };
 
   generateSharableLink() {
-    let url = window.location.origin + '?';
+    let url = window.location.origin + window.location.pathname + '?';
     const {options} = this.state;
     options.forEach(option => {
       url += `option=${option}&`
