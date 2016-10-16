@@ -56,13 +56,19 @@ const RegexGame = React.createClass({
   },
 
   getScore(options, pattern) {
-    let re = new RegExp(pattern);
+    let re = '';
     let count = 0;
-    options.forEach(option => {
-      if(re.test(option)) {
-        count++;
-      }
-    });
+    try {
+      re = new RegExp(pattern);
+      options.forEach(option => {
+        if(option.match(re)[0] === option) {
+          count++;
+        }
+      });
+    } catch (e){
+
+    }
+
     return count/options.length;
   },
 
@@ -93,7 +99,11 @@ const RegexOption = React.createClass({
   componentWillReceiveProps(nextProps) {
     const {text} = this.props;
     const type = this.props.regexType || 'g';
-    const re = new RegExp(nextProps.pattern, type);
+    let re = '';
+    try {
+      re = new RegExp(nextProps.pattern, type);
+    } catch (e) {
+    }
     this.setState({
       found: text.match(re),
     })
@@ -107,7 +117,11 @@ const RegexOption = React.createClass({
     let {text} = this.props;
 
     if (pattern) {
-      const re = new RegExp(pattern, type)
+      let re = '';
+      try {
+        re = new RegExp(pattern, type);
+      } catch (e) {
+      }
       text = text.replace(re, (match, x) => {
         return (`<span class="highlight" style="color:${matchColor}">${match}</span>`);
       });

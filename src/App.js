@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import './App.css';
 import RegexGame from './RegexGame.js';
 import url from '../public/circle.png';
-import sortIcon from '../public/sort-arrows.png';
+import sortIcon from '../public/sort.png';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      options: ['aa', 'aaa', 'aaaa', 'asd'],
+      options: ["f1rst@gmail.com", 'gibberish@xyz.me', 'second@try.co', 'yes@yahoo.co'],
       edit: false,
       share: false,
     };
@@ -96,7 +96,7 @@ class App extends Component {
     const toggleHide = share ? ' hide' : '';
     return (
       <div className='exercise frame-wrapper'>
-        <h1 className={`title${toggleHide}`}> Match the following expressions:</h1>
+        <h1 className={`title${toggleHide}`}> Match the following lines:</h1>
         <RegexGame
           options={options}
           onInput={this.changeBackground}
