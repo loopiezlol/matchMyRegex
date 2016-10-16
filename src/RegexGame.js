@@ -105,7 +105,7 @@ const RegexOption = React.createClass({
     } catch (e) {
     }
     this.setState({
-      found: text.match(re),
+      found: text.match(re)[0] === text,
     })
   },
 
