@@ -1,3 +1,5 @@
+To see the demo click [here](http://loopiezlol.me/matchMyRegex)
+
 This is a little side projects started as a React exercise, but finished due to too much free time.
 
 If you want to replicate the behaviour of the matching component feel free to use the `RegexGame.js` file in the project.
