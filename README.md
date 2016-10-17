@@ -9,7 +9,7 @@ After importing, you can use the componenet in the following way:
 ...
 render() {
 
-  const string = {'firstString', 'abcdef', 's0m3thing'};
+  const strings = {'firstString', 'abcdef', 's0m3thing'};
   return (
     <RegexGame options={strings} />
   );
